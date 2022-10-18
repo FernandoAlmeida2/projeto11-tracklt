@@ -5,25 +5,33 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Today from "./Pages/Today/Today";
+import { UserContext } from "./Contexts";
+import { useState } from "react";
 
 export default function App() {
-  function handleErrors(err){
-    if(err.status === 401){
+  const [userLogged, setUserLogged] = useState(null);
+  function handleErrors(err) {
+    if (err.status === 401) {
       alert(err.data.message);
-    } else{
+    } else {
       alert(err.data.details);
     }
   }
   return (
     <AppContainer>
-      <ResetStyle />
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login handleErrors={handleErrors} />} />
-        <Route path="/cadastro" element={<Register handleErrors={handleErrors} />} />
-        <Route path="/hoje" element={<Today />} />
-      </Routes>
-      </BrowserRouter>
+      <UserContext.Provider value={userLogged}>
+        <ResetStyle />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login handleErrors={handleErrors} setUserLogged={setUserLogged} />} />
+            <Route
+              path="/cadastro"
+              element={<Register handleErrors={handleErrors} />}
+            />
+            <Route path="/hoje" element={<Today />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
     </AppContainer>
   );
 }
@@ -31,7 +39,7 @@ export default function App() {
 const AppContainer = styled.div`
   * {
     box-sizing: border-box;
-    font-family: ${mainFont}
+    font-family: ${mainFont};
   }
   width: 100vw;
   height: 100vh;

@@ -11,7 +11,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
 
-export default function Login({ handleErrors }) {
+export default function Login({ handleErrors, setUserLogged }) {
   const [isLoading, setLoading] = useState(false);
   const [loginBody, setLogin] = useState({ email: "", password: "" });
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function Login({ handleErrors }) {
       axios
         .post(`${BASE_URL}auth/login`, loginBody)
         .then((res) => {
-          console.log(res.data);
+          setUserLogged(res.data);
           navigate("/hoje");
         })
         .catch((err) => {
