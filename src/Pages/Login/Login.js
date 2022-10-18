@@ -7,20 +7,58 @@ import {
 } from "../../styles/CommonStyles";
 import { ThreeDots } from "react-loader-spinner";
 import { useState } from "react";
+import axios from "axios";
+import { BASE_URL } from "../../constants/urls";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ handleErrors }) {
   const [isLoading, setLoading] = useState(false);
+  const [loginBody, setLogin] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+
+  function handleForm(e) {
+    setLogin({ ...loginBody, [e.target.name]: e.target.value });
+  }
+
   function submitLogin(e) {
     e.preventDefault();
-    setLoading(true);
+    if (!isLoading) {
+      setLoading(true);
+      axios
+        .post(`${BASE_URL}auth/login`, loginBody)
+        .then((res) => {
+          console.log(res.data);
+          navigate("/hoje");
+        })
+        .catch((err) => {
+          setLoading(false);
+          handleErrors(err.response);
+        });
+    }
   }
   return (
     <LogRegStyle>
       <img src={logo} alt="logo tracklt" />
       <form>
-        <InputStyle placeholder="email" />
-        <InputStyle placeholder="senha" />
-        <ButtonStyle type="submit" onClick={submitLogin}>
+        <InputStyle
+          placeholder="email"
+          name="email"
+          type="email"
+          isLoading={isLoading}
+          onChange={handleForm}
+          disabled={isLoading}
+          required
+        />
+        <InputStyle
+          placeholder="senha"
+          type="password"
+          name="password"
+          isLoading={isLoading}
+          onChange={handleForm}
+          disabled={isLoading}
+          required
+        />
+        <ButtonStyle type="submit" onClick={submitLogin} isLoading={isLoading}>
           {isLoading ? (
             <ThreeDots height="50" width="50" radius="9" color="#ffffff" />
           ) : (

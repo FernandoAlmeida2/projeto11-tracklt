@@ -11,7 +11,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
 
-export default function Register() {
+export default function Register({ handleErrors }) {
   const [isLoading, setLoading] = useState(false);
   const [registerBody, setRegister] = useState({
     email: "",
@@ -31,13 +31,12 @@ export default function Register() {
       setLoading(true);
       axios
         .post(`${BASE_URL}auth/sign-up`, registerBody)
-        .then((res) => {
-          console.log(res.data);
+        .then(() => {
           navigate("/");
         })
         .catch((err) => {
           setLoading(false);
-          alert(err.response.data.details);
+          handleErrors(err.response);
         });
     }
   }
