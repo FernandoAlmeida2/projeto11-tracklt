@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+//Login and register styles
+
 export const LogRegStyle = styled.div`
   display: flex;
   flex-direction: column;
@@ -31,7 +33,10 @@ export const InputStyle = styled.input`
   }
 `;
 
-export const ButtonStyle = styled.button`
+export const ButtonStyle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 80.8vw;
   height: 12vw;
   background: #52b6ff;
@@ -39,10 +44,13 @@ export const ButtonStyle = styled.button`
   border: none;
   color: #ffffff;
   font-size: 5.33vw;
+  cursor: pointer;
 `;
 
+
 export const NavLink = styled(Link)`
-font-size: 3.73vw;
-color: #52B6FF;
-margin-top: 7vw;
+  font-size: 3.73vw;
+  color: #52b6ff;
+  margin-top: 7vw;
 `;
+
