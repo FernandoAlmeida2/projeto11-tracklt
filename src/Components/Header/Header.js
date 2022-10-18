@@ -17,8 +17,9 @@ export default function Header(){
 const HeaderStyle = styled.div`
     position: fixed;
     top: 0;
+    z-index: 1;
     width: 100vw;
-    height: 18.7vw;
+    height: 9.31vh;
     background-color: #126BA5;
     display: flex;
     align-items: center;
