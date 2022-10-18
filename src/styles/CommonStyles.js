@@ -24,7 +24,10 @@ export const InputStyle = styled.input`
   border-radius: 5px;
   width: 80.8vw;
   height: 12vw;
-  padding-left: 1vw;
+  padding-left: 2vw;
+  font-size: 5.33vw;
+  background-color: ${(props) => (props.isLoading ? "#F2F2F2" : "ffffff")};
+  color: ${(props) => (props.isLoading ? "#AFAFAF;" : "#666666")};
 
   ::placeholder {
     opacity: 1;
@@ -34,6 +37,7 @@ export const InputStyle = styled.input`
 `;
 
 export const ButtonStyle = styled.div`
+  opacity: ${(props) => (props.isLoading ? 0.7 : 1)};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,13 +48,11 @@ export const ButtonStyle = styled.div`
   border: none;
   color: #ffffff;
   font-size: 5.33vw;
-  cursor: pointer;
+  cursor: ${(props) => (props.isLoading ? "auto" : "pointer")};
 `;
-
 
 export const NavLink = styled(Link)`
   font-size: 3.73vw;
   color: #52b6ff;
   margin-top: 7vw;
 `;
-
