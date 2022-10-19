@@ -1,21 +1,26 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants/colors";
 import footerIcon from "../../images/footerIcon.png";
+import { Link } from "react-router-dom";
 
-const {white, lightBlue} = COLORS;
+const { white, lightBlue } = COLORS;
 
 export default function Footer() {
   return (
     <FooterStyle>
-      <h1>Hábitos</h1>
+      <NavLink to="/habitos">
+        Hábitos
+      </NavLink>
       <FooterIcon>
         <div>
-          <h2>Hoje</h2>
+          <NavLink to="/hoje" >
+             <div>Hoje</div> 
+          </NavLink>
           <img src={footerIcon} alt="footer-icon" />
         </div>
       </FooterIcon>
 
-      <h1>Histórico</h1>
+      <NavLink to="/habitos">Histórico</NavLink>
     </FooterStyle>
   );
 }
@@ -31,10 +36,6 @@ const FooterStyle = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 10vw;
-  h1 {
-    color: ${lightBlue};
-    font-size: 4.8vw;
-  }
 `;
 
 const FooterIcon = styled.div`
@@ -59,10 +60,15 @@ const FooterIcon = styled.div`
       width: 18.7vw;
       height: 21.7vw;
     }
-
-    h2 {
-      color: ${white};
-      font-size: 4.8vw;
-    }
   }
 `;
+
+const NavLink = styled(Link)`
+  color: ${lightBlue};
+  font-size: 4.8vw;
+  text-decoration: none;
+  div {
+      color: ${white};
+    }
+
+`

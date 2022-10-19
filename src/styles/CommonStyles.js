@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { COLORS, inputColors } from "../constants/colors";
+import { COLORS, inputColors, dayClickedClr, dayNormalClr } from "../constants/colors";
+
 
 const { lightBlue, white, text} = COLORS;
 
@@ -60,4 +61,42 @@ export const NavLink = styled(Link)`
   font-size: 3.73vw;
   color: ${lightBlue};
   margin-top: 7vw;
+`;
+
+// Habits
+export const HabitStyle = styled.div`
+width: 90.7vw;
+height: 25.1vw;
+display: flex;
+align-items: center;
+justify-content: space-between;
+color: ${text};
+padding: 4.53vw 3.47vw;
+background-color: ${white};
+margin-bottom: 2.67vw;
+border-radius: 1.33vw;
+position: relative;
+`;
+
+export const DaysContainer = styled.div`
+  display: flex;
+  gap: 1.2vw;
+`;
+
+export const DayDiv = styled.div`
+  width: 8vw;
+  height: 8vw;
+  font-size: 5.3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ${props => props.isClickable === "yep" ? "pointer" : "auto"};
+  color: ${(props) =>
+    props.isSelected ? dayClickedClr.color : dayNormalClr.color};
+  background-color: ${(props) =>
+    props.isSelected ? dayClickedClr.background : dayNormalClr.background};
+  border: 1px solid
+    ${(props) =>
+      props.isSelected ? dayClickedClr.border : dayNormalClr.border};
+  border-radius: 1.33vw;
 `;

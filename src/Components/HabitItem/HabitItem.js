@@ -1,78 +1,60 @@
+import { HabitStyle } from "../../styles/CommonStyles";
+import DayBoxes from "../DayBoxes";
+import trash from "../../images/trash.png";
 import styled from "styled-components";
-import { COLORS, checkNone } from "../../constants/colors";
-import checkmark from "../../images/checkmark.png";
+import axios from "axios";
+import { BASE_URL } from "../../constants/urls";
+import { UserContext } from "../../Contexts";
+import { useContext } from "react";
 
-const { text, white, green } = COLORS;
+export default function HabitItem({ habit, refreshHabits}) {
+  const userData = useContext(UserContext);
 
-export default function HabitItem({ habit }) {
+  function deleteHabit(){
+    if (window.confirm("Deseja realmente apagar este hábito?")) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      };
+      axios.delete(`${BASE_URL}habits/${habit.id}`, config).then(() => {
+        refreshHabits();
+      })
+      .catch((err) => {
+        alert(err.response.statusText);
+      });
+    }
+    
+  }
+
   return (
     <HabitStyle>
-      <TextStyle>
-        <h2>{habit.name}</h2>
-        <h3>
-          Sequência atual:{" "}
-          <CurrentColor done={habit.done}>
-            {habit.currentSequence} dias
-          </CurrentColor>
-          <br />
-          Seu recorde:{" "}
-          <HighestColor isHighest={habit.highestSequence === habit.currentSequence}>
-            {habit.highestSequence} dias
-          </HighestColor>
-        </h3>
-      </TextStyle>
-      <CheckStyle done={habit.done}>
-        <img src={checkmark} alt="checkmark" />
-      </CheckStyle>
+      <ContentStyle>
+        <p>{habit.name}</p>
+        <DayBoxes
+          daysSelected={habit.days}
+          selectDay=""
+          isClickable="nop"
+        />
+      </ContentStyle>
+      <TrashIcon src={trash} alt="delete item" onClick={deleteHabit} />
     </HabitStyle>
   );
 }
 
-const HabitStyle = styled.div`
-  width: 90.7vw;
-  height: 25.1vw;
+const ContentStyle = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: ${text};
-  padding: 4.53vw 3.47vw;
-  background-color: ${white};
-  margin-bottom: 2.67vw;
-  border-radius: 1.33vw;
-`;
-
-const TextStyle = styled.div`
-  h2 {
+  flex-direction: column;
+  gap: 2vw;
+  p {
     font-size: 5.3vw;
-    margin-bottom: 2vw;
     line-height: 6.67vw;
   }
-
-  h3 {
-    font-size: 3.47vw;
-    line-height: 4.27vw;
-  }
 `;
 
-const CheckStyle = styled.div`
-  background-color: ${(props) => (props.done ? green : checkNone.background)};
-  border: 1px solid ${(props) => (props.done ? green : checkNone.border)};
-  width: 18.4vw;
-  height: 18.4vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1.33vw;
-  img {
-    width: 9.33vw;
-    max-height: 7.47vw;
-  }
-`;
-
-const CurrentColor = styled.span`
-  color: ${(props) => (props.done ? green : text)};
-`;
-
-const HighestColor = styled.span`
-    color: ${(props) => (props.isHighest ? green : text)};
-`;
+const TrashIcon = styled.img`
+    position: absolute;
+    top: 3vw;
+    right: 3vw;
+    cursor: pointer;
+`

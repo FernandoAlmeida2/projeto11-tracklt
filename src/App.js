@@ -5,8 +5,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Today from "./Pages/Today/Today";
-import { UserContext } from "./Contexts";
+import { UserContext, ProgressContext } from "./Contexts";
 import { useState } from "react";
+import Header from "./Components/Header/Header";
+import Footer from "./Components/Footer/Footer";
+import Habits from "./Pages/Habits/Habits";
 
 export default function App() {
   const [userLogged, setUserLogged] = useState(null);
@@ -20,36 +23,43 @@ export default function App() {
   }
   return (
     <AppContainer>
-      <UserContext.Provider value={userLogged}>
-        <ResetStyle />
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Login
-                  handleErrors={handleErrors}
-                  setUserLogged={setUserLogged}
-                />
-              }
-            />
-            <Route
-              path="/cadastro"
-              element={<Register handleErrors={handleErrors} />}
-            />
-            <Route
-              path="/hoje"
-              element={
-                <Today
-                  handleErrors={handleErrors}
-                  todayProgress={todayProgress}
-                  setProgress={setProgress}
-                />
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </UserContext.Provider>
+      <ProgressContext.Provider value={todayProgress}>
+        <UserContext.Provider value={userLogged}>
+          <ResetStyle />
+          <BrowserRouter>
+            {userLogged && <Header />}
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Login
+                    handleErrors={handleErrors}
+                    setUserLogged={setUserLogged}
+                  />
+                }
+              />
+              <Route
+                path="/cadastro"
+                element={<Register handleErrors={handleErrors} />}
+              />
+              <Route
+                path="/hoje"
+                element={
+                  <Today
+                    handleErrors={handleErrors}
+                    setProgress={setProgress}
+                  />
+                }
+              />
+              <Route
+                path="/habitos"
+                element={<Habits handleErrors={handleErrors} />}
+              />
+            </Routes>
+            {userLogged && <Footer />}
+          </BrowserRouter>
+        </UserContext.Provider>
+      </ProgressContext.Provider>
     </AppContainer>
   );
 }

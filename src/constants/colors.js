@@ -14,3 +14,6 @@ export const inputColors = {
   loading: "#AFAFAF",
   border: "#d5d5d5",
 };
+
+export const dayNormalClr = {color: "#DBDBDB", border: "#d4d4d4", background: "#ffffff" }
+export const dayClickedClr = {color: "#ffffff", border: "#cfcfcf", background: "#cfcfcf" }
