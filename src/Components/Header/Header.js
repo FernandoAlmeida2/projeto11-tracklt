@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { UserContext } from "../../Contexts";
 import styled from "styled-components";
 import { logoFont } from "../../constants/fonts";
+import { COLORS } from "../../constants/colors";
+
+const {darkBlue, white} = COLORS;
 
 export default function Header(){
     const userData = useContext(UserContext);
@@ -20,7 +23,7 @@ const HeaderStyle = styled.div`
     z-index: 1;
     width: 100vw;
     height: 9.31vh;
-    background-color: #126BA5;
+    background-color: ${darkBlue};
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,7 +31,7 @@ const HeaderStyle = styled.div`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     h1{
         font-family: ${logoFont};
-        color: #ffffff;
+        color: ${white};
         font-size: 10.4vw;  
     }
 

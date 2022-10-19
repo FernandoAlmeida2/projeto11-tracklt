@@ -1,5 +1,8 @@
 import styled from "styled-components";
+import { COLORS } from "../../constants/colors";
 import footerIcon from "../../images/footerIcon.png";
+
+const {white, lightBlue} = COLORS;
 
 export default function Footer() {
   return (
@@ -21,7 +24,7 @@ const FooterStyle = styled.div`
   position: fixed;
   z-index: 1;
   bottom: 0;
-  background-color: #ffffff;
+  background-color: ${white};
   width: 100vw;
   height: 9.31vh;
   display: flex;
@@ -29,7 +32,7 @@ const FooterStyle = styled.div`
   justify-content: space-between;
   padding: 0 10vw;
   h1 {
-    color: #52b6ff;
+    color: ${lightBlue};
     font-size: 4.8vw;
   }
 `;
@@ -41,7 +44,7 @@ const FooterIcon = styled.div`
   width: 24.3vw;
   height: 24.3vw;
   border-radius: 24.3vw;
-  background-color: #52b6ff;
+  background-color: ${lightBlue};
   z-index: 1;
   div {
     width: 24.3vw;
@@ -58,7 +61,7 @@ const FooterIcon = styled.div`
     }
 
     h2 {
-      color: #ffffff;
+      color: ${white};
       font-size: 4.8vw;
     }
   }

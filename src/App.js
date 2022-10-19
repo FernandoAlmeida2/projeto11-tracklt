@@ -10,6 +10,7 @@ import { useState } from "react";
 
 export default function App() {
   const [userLogged, setUserLogged] = useState(null);
+  const [todayProgress, setProgress] = useState(0);
   function handleErrors(err) {
     if (err.status === 401) {
       alert(err.data.message);
@@ -23,12 +24,29 @@ export default function App() {
         <ResetStyle />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login handleErrors={handleErrors} setUserLogged={setUserLogged} />} />
+            <Route
+              path="/"
+              element={
+                <Login
+                  handleErrors={handleErrors}
+                  setUserLogged={setUserLogged}
+                />
+              }
+            />
             <Route
               path="/cadastro"
               element={<Register handleErrors={handleErrors} />}
             />
-            <Route path="/hoje" element={<Today />} />
+            <Route
+              path="/hoje"
+              element={
+                <Today
+                  handleErrors={handleErrors}
+                  todayProgress={todayProgress}
+                  setProgress={setProgress}
+                />
+              }
+            />
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
@@ -41,6 +59,4 @@ const AppContainer = styled.div`
     box-sizing: border-box;
     font-family: ${mainFont};
   }
-  width: 100vw;
-  height: 100vh;
 `;
