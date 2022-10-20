@@ -41,7 +41,11 @@ export default function Today({ setProgress }) {
       .get(`${BASE_URL}habits/today`, config)
       .then((res) => {
         const DoneNumber = res.data.filter((h) => h.done === true).length;
-        setProgress(Math.round((100 * DoneNumber) / res.data.length));
+        if (res.data.length === 0) {
+          setProgress(0);
+        } else {
+          setProgress(Math.round((100 * DoneNumber) / res.data.length));
+        }
         setTodayData(res.data);
       })
       .catch((err) => {

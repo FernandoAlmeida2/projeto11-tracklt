@@ -10,8 +10,8 @@ export default function InfoMessage({ dayMessage, setMessage }) {
           <h3>
             {dayMessage.day} - {weekdays[dayMessage.habits[0].weekDay]}
           </h3>
-          {dayMessage.habits.map((d) => (
-            <MessageItem key={d.historyId} done={d.done}>
+          {dayMessage.habits.map((d, i) => (
+            <MessageItem key={i} done={d.done}>
               <p>
                 Hábito: <span>{d.name}</span>
               </p>

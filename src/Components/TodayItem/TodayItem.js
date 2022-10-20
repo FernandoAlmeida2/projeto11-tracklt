@@ -81,6 +81,7 @@ const CheckStyle = styled.div`
   background-color: ${(props) => (props.done ? green : checkNone.background)};
   border: 1px solid ${(props) => (props.done ? green : checkNone.border)};
   width: 18.4vw;
+  min-width: 18.4vw;
   height: 18.4vw;
   display: flex;
   align-items: center;
