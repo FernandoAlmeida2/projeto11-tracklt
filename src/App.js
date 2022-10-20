@@ -10,6 +10,7 @@ import { useState } from "react";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
 import Habits from "./Pages/Habits/Habits";
+import History from "./Pages/History/History";
 
 export default function App() {
   const [userLogged, setUserLogged] = useState(null);
@@ -44,16 +45,13 @@ export default function App() {
               />
               <Route
                 path="/hoje"
-                element={
-                  <Today
-                    setProgress={setProgress}
-                  />
-                }
+                element={<Today setProgress={setProgress} />}
               />
               <Route
                 path="/habitos"
                 element={<Habits handleErrors={handleErrors} />}
               />
+              <Route path="/historico" element={<History />} />
             </Routes>
             {userLogged && <Footer />}
           </BrowserRouter>

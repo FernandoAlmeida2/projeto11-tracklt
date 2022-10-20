@@ -28,7 +28,7 @@ export default function Footer() {
           ;
         </FooterIcon>
       </NavLink>
-      <NavLink to="/habitos">Histórico</NavLink>
+      <NavLink to="/historico">Histórico</NavLink>
     </FooterStyle>
   );
 }
@@ -61,7 +61,7 @@ const FooterIcon = styled.div`
 const NavLink = styled(Link)`
   color: ${lightBlue};
   font-size: 4.8vw;
-  text-decoration: none;r;
+  text-decoration: none;
   div {
     color: ${white};
   }
