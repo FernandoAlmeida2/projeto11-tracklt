@@ -7,31 +7,46 @@ import { UserContext } from "../../Contexts";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import SearchingData from "../../Components/SearchingData/SearchingData";
+import InfoMessage from "./InfoMessage";
 
 const { darkBlue, text, white, green, red } = COLORS;
 
 export default function History() {
   const [historyData, setHistData] = useState(null);
   const [value, onChange] = useState(new Date());
+  const [dayMessage, setMessage] = useState(null);
   const userData = useContext(UserContext);
   const dayjs = require("dayjs");
 
-  function tileClassName({ date }) {
+  function getRegisterOrNull(date) {
     const register = historyData.filter((h) => {
       const dateArray = h.day.split("/");
       const engDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
-      if (dayjs(engDate).isSame(dayjs(date))){
+      if (dayjs(engDate).isSame(dayjs(date))) {
         return true;
-      }    
+      }
       return false;
     });
-    if (register.length === 1) {
-      if (register[0].habits.filter((r) => r.done === false).length === 0) {
+    if (register.length === 1) return register[0];
+    return null;
+  }
+
+  function tileClassName({ date }) {
+    const historyDay = getRegisterOrNull(date);
+    if (historyDay !== null) {
+      if (historyDay.habits.filter((r) => r.done === false).length === 0) {
         return "day success";
       }
       return "day fail";
     } else {
       return "day";
+    }
+  }
+
+  function displayInfo( date ) {
+    const historyDay = getRegisterOrNull(date);
+    if (historyDay !== null) {
+      setMessage({day: historyDay.day, habits: [...historyDay.habits]});
     }
   }
 
@@ -66,8 +81,12 @@ export default function History() {
             value={value}
             className="calendar"
             tileClassName={tileClassName}
+            onClickDay={displayInfo}
           />
         </CalendarStyle>
+      )}
+      {dayMessage !== null && (
+        <InfoMessage dayMessage={dayMessage} setMessage={setMessage} />
       )}
     </HistStyle>
   );
@@ -103,7 +122,7 @@ const CalendarStyle = styled.div`
     border: none;
   }
 
-  .day{
+  .day {
     width: 9vw;
     height: 9vw;
     border-radius: 9vw;
