@@ -46,7 +46,6 @@ export default function App() {
                 path="/hoje"
                 element={
                   <Today
-                    handleErrors={handleErrors}
                     setProgress={setProgress}
                   />
                 }

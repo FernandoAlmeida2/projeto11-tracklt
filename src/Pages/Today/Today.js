@@ -10,8 +10,9 @@ import SearchingData from "../../Components/SearchingData/SearchingData";
 
 const { darkBlue, green, textNoProgress } = COLORS;
 
-export default function Today({ handleErrors, setProgress }) {
+export default function Today({ setProgress }) {
   const [todayHabits, setTodayData] = useState(null);
+  const [refreshControl, setRefresh] = useState(0);
   const userData = useContext(UserContext);
   const todayProgress = useContext(ProgressContext);
   const dayjs = require("dayjs");
@@ -19,11 +20,15 @@ export default function Today({ handleErrors, setProgress }) {
   const dayofMonth = dayjs().locale("pt-br").date();
   const month = dayjs().locale("pt-br").month();
 
-  function progressMessage(total) {
+  function refreshHabits() {
+    setRefresh(refreshControl + 1);
+  }
+
+  function progressMessage() {
     if (todayProgress === 0) {
       return "Nenhum hábito concluído ainda";
     }
-    return `${Math.round((100 * todayHabits) / total)}% dos hábitos concluídos`;
+    return `${todayProgress}% dos hábitos concluídos`;
   }
 
   useEffect(() => {
@@ -35,26 +40,31 @@ export default function Today({ handleErrors, setProgress }) {
     axios
       .get(`${BASE_URL}habits/today`, config)
       .then((res) => {
+        const DoneNumber = res.data.filter((h) => h.done === true).length;
+        setProgress(Math.round((100 * DoneNumber) / res.data.length));
         setTodayData(res.data);
       })
       .catch((err) => {
-        handleErrors(err.response);
+        alert(err.response.data.message);
       });
-  }, [handleErrors, userData.token, todayProgress]);
-
+  }, [userData.token, refreshControl, setProgress, todayHabits]);
   if (todayHabits === null) {
     return <SearchingData />;
   }
   return (
-    <TodayStyle habitsNum={todayHabits.length}>
+    <TodayStyle habitsNum={todayProgress}>
       <h1>
         {weekdays[dayNumber]}, {dayofMonth}/{month < 10 && "0"}
         {month}
       </h1>
-      <p>{progressMessage(todayHabits.length)}</p>
+      <p>{progressMessage()}</p>
       <HabitsList>
         {todayHabits.map((habit) => (
-          <TodayItem key={habit.id} habit={habit} setProgress={setProgress} />
+          <TodayItem
+            key={habit.id}
+            habit={habit}
+            refreshHabits={refreshHabits}
+          />
         ))}
       </HabitsList>
     </TodayStyle>

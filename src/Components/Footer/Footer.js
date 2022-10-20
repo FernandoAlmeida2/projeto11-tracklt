@@ -1,25 +1,33 @@
 import styled from "styled-components";
 import { COLORS } from "../../constants/colors";
-import footerIcon from "../../images/footerIcon.png";
 import { Link } from "react-router-dom";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import { ProgressContext } from "../../Contexts";
+import { useContext } from "react";
 
 const { white, lightBlue } = COLORS;
 
 export default function Footer() {
+  const todayProgress = useContext(ProgressContext);
   return (
     <FooterStyle>
-      <NavLink to="/habitos">
-        Hábitos
+      <NavLink to="/habitos">Hábitos</NavLink>
+      <NavLink to="/hoje">
+        <FooterIcon>
+          <CircularProgressbar
+            value={todayProgress}
+            text="Hoje"
+            strokeWidth="10"
+            styles={buildStyles({
+              pathColor: white,
+              textColor: white,
+              trailColor: lightBlue,
+            })}
+          />
+          ;
+        </FooterIcon>
       </NavLink>
-      <FooterIcon>
-        <div>
-          <NavLink to="/hoje" >
-             <div>Hoje</div> 
-          </NavLink>
-          <img src={footerIcon} alt="footer-icon" />
-        </div>
-      </FooterIcon>
-
       <NavLink to="/habitos">Histórico</NavLink>
     </FooterStyle>
   );
@@ -45,30 +53,16 @@ const FooterIcon = styled.div`
   width: 24.3vw;
   height: 24.3vw;
   border-radius: 24.3vw;
+  padding: 1.5vw;
   background-color: ${lightBlue};
   z-index: 1;
-  div {
-    width: 24.3vw;
-    height: 24.3vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    img {
-      position: absolute;
-      right: 1.6vw;
-      width: 18.7vw;
-      height: 21.7vw;
-    }
-  }
 `;
 
 const NavLink = styled(Link)`
   color: ${lightBlue};
   font-size: 4.8vw;
-  text-decoration: none;
+  text-decoration: none;r;
   div {
-      color: ${white};
-    }
-
-`
+    color: ${white};
+  }
+`;

@@ -2,17 +2,16 @@ import styled from "styled-components";
 import { COLORS, checkNone } from "../../constants/colors";
 import checkmark from "../../images/checkmark.png";
 import { HabitStyle } from "../../styles/CommonStyles";
-import { UserContext, ProgressContext } from "../../Contexts";
+import { UserContext } from "../../Contexts";
 import { useContext } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 
 const { text, green } = COLORS;
 
-export default function TodayItem({ habit, setProgress }) {
+export default function TodayItem({ habit, refreshHabits }) {
   const { highestSequence, currentSequence, done, name, id } = habit;
   const userData = useContext(UserContext);
-  const todayProgress = useContext(ProgressContext);
   function handleCheckClick() {
     const config = {
       headers: {
@@ -21,18 +20,18 @@ export default function TodayItem({ habit, setProgress }) {
     };
     if (done) {
       axios
-        .post(`${BASE_URL}habits/${id}/uncheck`, config)
+        .post(`${BASE_URL}habits/${id}/uncheck`, [], config)
         .then(() => {
-          setProgress(todayProgress - 1);
+          refreshHabits();
         })
         .catch((err) => {
           alert(err.response.data.message);
         });
     } else {
       axios
-        .post(`${BASE_URL}habits/${id}/check`, config)
+        .post(`${BASE_URL}habits/${id}/check`, [], config)
         .then(() => {
-          setProgress(todayProgress + 1);
+          refreshHabits();
         })
         .catch((err) => {
           console.log(config)
