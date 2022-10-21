@@ -27,6 +27,7 @@ export default function Login({ handleErrors, setUserLogged }) {
       axios
         .post(`${BASE_URL}auth/login`, loginBody)
         .then((res) => {
+          localStorage.setItem("user", JSON.stringify(res.data));
           setUserLogged(res.data);
           navigate("/hoje");
         })
@@ -36,6 +37,12 @@ export default function Login({ handleErrors, setUserLogged }) {
         });
     }
   }
+  if(localStorage.getItem("user") !== null){
+    const userObj = JSON.parse(localStorage.getItem("user"));
+    setUserLogged(userObj);
+    navigate("/hoje");
+  }
+
   return (
     <LogRegStyle>
       <img src={logo} alt="logo tracklt" />
