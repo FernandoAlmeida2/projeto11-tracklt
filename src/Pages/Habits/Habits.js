@@ -8,10 +8,11 @@ import SearchingData from "../../Components/SearchingData/SearchingData";
 import { COLORS } from "../../constants/colors";
 import CreateForm from "./CreateForm";
 import HabitItem from "../../Components/HabitItem/HabitItem";
+import handleErrors from "../../handleErrors";
 
 const { lightBlue, darkBlue, text } = COLORS;
 
-export default function Habits({ handleErrors }) {
+export default function Habits() {
   const userData = useContext(UserContext);
   const [habitsList, setHabitsList] = useState(null);
   const [isAddClicked, setAddClicked] = useState(false);
@@ -35,7 +36,7 @@ export default function Habits({ handleErrors }) {
       .catch((err) => {
         handleErrors(err.response);
       });
-  }, [handleErrors, userData.token, refreshControl]);
+  }, [userData.token, refreshControl]);
 
   if (habitsList === null) {
     return <SearchingData />;

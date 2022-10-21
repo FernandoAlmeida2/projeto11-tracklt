@@ -10,8 +10,9 @@ import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
+import handleErrors from "../../handleErrors";
 
-export default function Login({ handleErrors, setUserLogged }) {
+export default function Login({ setUserLogged }) {
   const [isLoading, setLoading] = useState(false);
   const [loginBody, setLogin] = useState({ email: "", password: "" });
   const navigate = useNavigate();

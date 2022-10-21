@@ -10,8 +10,9 @@ import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../constants/urls";
 import { useNavigate } from "react-router-dom";
+import handleErrors from "../../handleErrors";
 
-export default function Register({ handleErrors }) {
+export default function Register() {
   const [isLoading, setLoading] = useState(false);
   const [registerBody, setRegister] = useState({
     email: "",

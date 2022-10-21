@@ -7,6 +7,7 @@ import { COLORS } from "../../constants/colors";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import DayBoxes from "../../Components/DayBoxes";
+import handleErrors from "../../handleErrors";
 
 const { white, lightBlue } = COLORS;
 
@@ -51,8 +52,7 @@ export default function CreateForm({
         })
         .catch((err) => {
           setLoading(false);
-          console.log(err.response);
-          alert(err.response.statusText);
+          handleErrors(err.response);
         });
     }
   }

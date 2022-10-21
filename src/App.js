@@ -15,13 +15,6 @@ import History from "./Pages/History/History";
 export default function App() {
   const [userLogged, setUserLogged] = useState(null);
   const [todayProgress, setProgress] = useState(0);
-  function handleErrors(err) {
-    if (err.status === 401) {
-      alert(err.data.message);
-    } else {
-      alert(err.data.details);
-    }
-  }
   return (
     <AppContainer>
       <ProgressContext.Provider value={todayProgress}>
@@ -32,16 +25,11 @@ export default function App() {
             <Routes>
               <Route
                 path="/"
-                element={
-                  <Login
-                    handleErrors={handleErrors}
-                    setUserLogged={setUserLogged}
-                  />
-                }
+                element={<Login setUserLogged={setUserLogged} />}
               />
               <Route
                 path="/cadastro"
-                element={<Register handleErrors={handleErrors} />}
+                element={<Register/>}
               />
               <Route
                 path="/hoje"
@@ -49,7 +37,7 @@ export default function App() {
               />
               <Route
                 path="/habitos"
-                element={<Habits handleErrors={handleErrors} />}
+                element={<Habits />}
               />
               <Route path="/historico" element={<History />} />
             </Routes>
