@@ -22,7 +22,6 @@ export default function Login({ setUserLogged }) {
   }
 
   function submitLogin(e) {
-    e.preventDefault();
     if (!isLoading) {
       setLoading(true);
       axios
@@ -69,7 +68,6 @@ export default function Login({ setUserLogged }) {
           required
         />
         <ButtonStyle
-          type="submit"
           onClick={submitLogin}
           isLoading={isLoading}
           data-identifier="login-btn"
