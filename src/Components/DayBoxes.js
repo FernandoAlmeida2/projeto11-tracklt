@@ -11,6 +11,7 @@ export default function DayBoxes({ daysSelected, selectDay, isClickable }) {
           isSelected={daysSelected.includes(i)}
           isClickable={isClickable}
           onClick={() => isClickable === "yep" && selectDay(i)}
+          data-identifier="week-day-btn"
         >
           {day}
         </DayDiv>

@@ -12,7 +12,9 @@ export default function Footer() {
   const todayProgress = useContext(ProgressContext);
   return (
     <FooterStyle>
-      <NavLink to="/habitos">Hábitos</NavLink>
+      <NavLink to="/habitos" data-identifier="habit-page-action">
+        Hábitos
+      </NavLink>
       <NavLink to="/hoje">
         <FooterIcon>
           <CircularProgressbar
@@ -28,7 +30,9 @@ export default function Footer() {
           ;
         </FooterIcon>
       </NavLink>
-      <NavLink to="/historico">Histórico</NavLink>
+      <NavLink to="/historico" data-identifier="historic-page-action">
+        Histórico
+      </NavLink>
     </FooterStyle>
   );
 }

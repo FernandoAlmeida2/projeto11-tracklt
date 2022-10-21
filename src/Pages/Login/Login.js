@@ -38,7 +38,7 @@ export default function Login({ setUserLogged }) {
         });
     }
   }
-  if(localStorage.getItem("user") !== null){
+  if (localStorage.getItem("user") !== null) {
     const userObj = JSON.parse(localStorage.getItem("user"));
     setUserLogged(userObj);
     navigate("/hoje");
@@ -55,6 +55,7 @@ export default function Login({ setUserLogged }) {
           isLoading={isLoading}
           onChange={handleForm}
           disabled={isLoading}
+          data-identifier="input-email"
           required
         />
         <InputStyle
@@ -64,9 +65,15 @@ export default function Login({ setUserLogged }) {
           isLoading={isLoading}
           onChange={handleForm}
           disabled={isLoading}
+          data-identifier="input-password"
           required
         />
-        <ButtonStyle type="submit" onClick={submitLogin} isLoading={isLoading}>
+        <ButtonStyle
+          type="submit"
+          onClick={submitLogin}
+          isLoading={isLoading}
+          data-identifier="login-btn"
+        >
           {isLoading ? (
             <ThreeDots height="50" width="50" radius="9" color="#ffffff" />
           ) : (
@@ -74,7 +81,9 @@ export default function Login({ setUserLogged }) {
           )}
         </ButtonStyle>
       </form>
-      <NavLink to="/cadastro">Não tem uma conta? Cadastre-se!</NavLink>
+      <NavLink to="/cadastro" data-identifier="sign-up-action">
+        Não tem uma conta? Cadastre-se!
+      </NavLink>
     </LogRegStyle>
   );
 }

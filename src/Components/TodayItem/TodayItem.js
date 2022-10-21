@@ -34,14 +34,14 @@ export default function TodayItem({ habit, refreshHabits }) {
           refreshHabits();
         })
         .catch((err) => {
-          console.log(config)
+          console.log(config);
           alert(err.response.data.message);
         });
     }
   }
   return (
     <HabitStyle>
-      <TextStyle>
+      <TextStyle data-identifier="today-infos">
         <h2>{name}</h2>
         <h3>
           Sequência atual:{" "}
@@ -58,7 +58,12 @@ export default function TodayItem({ habit, refreshHabits }) {
         </h3>
       </TextStyle>
       <CheckStyle done={done}>
-        <img src={checkmark} alt="checkmark" onClick={handleCheckClick} />
+        <img
+          src={checkmark}
+          alt="checkmark"
+          onClick={handleCheckClick}
+          data-identifier="done-habit-btn"
+        />
       </CheckStyle>
     </HabitStyle>
   );

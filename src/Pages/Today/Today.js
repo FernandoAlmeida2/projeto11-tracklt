@@ -57,11 +57,11 @@ export default function Today({ setProgress }) {
   }
   return (
     <TodayStyle habitsNum={todayProgress}>
-      <h1>
+      <h1 data-identifier="today-infos">
         {weekdays[dayNumber]}, {dayofMonth}/{month < 10 && "0"}
         {month}
       </h1>
-      <p>{progressMessage()}</p>
+      <p data-identifier="today-infos">{progressMessage()}</p>
       <HabitsList>
         {todayHabits.map((habit) => (
           <TodayItem

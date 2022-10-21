@@ -52,6 +52,7 @@ export default function Register() {
           isLoading={isLoading}
           onChange={handleForm}
           disabled={isLoading}
+          data-identifier="input-email"
           required
         />
         <InputStyle
@@ -61,6 +62,7 @@ export default function Register() {
           isLoading={isLoading}
           onChange={handleForm}
           disabled={isLoading}
+          data-identifier="input-password"
           required
         />
         <InputStyle
@@ -69,6 +71,7 @@ export default function Register() {
           isLoading={isLoading}
           onChange={handleForm}
           disabled={isLoading}
+          data-identifier="input-name"
           required
         />
         <InputStyle
@@ -78,6 +81,7 @@ export default function Register() {
           isLoading={isLoading}
           onChange={handleForm}
           disabled={isLoading}
+          data-identifier="input-photo"
           required
         />
         <ButtonStyle
@@ -92,7 +96,9 @@ export default function Register() {
           )}
         </ButtonStyle>
       </form>
-      <NavLink to="/">Já tem uma conta? Faça login!</NavLink>
+      <NavLink to="/" data-identifier="back-to-login-action">
+        Já tem uma conta? Faça login!
+      </NavLink>
     </LogRegStyle>
   );
 }

@@ -65,6 +65,7 @@ export default function CreateForm({
         value={valueInput}
         onChange={(e) => setValue(e.target.value)}
         disabled={isLoading}
+        data-identifier="input-habit-name"
         required
       />
       <DayBoxes
@@ -73,8 +74,16 @@ export default function CreateForm({
         isClickable={isLoading ? "nop" : "yep"}
       />
       <ButtonsDiv>
-        <div onClick={() => setAddClicked(false)}>Cancelar</div>
-        <SaveButton onClick={handleForm}>
+        <div
+          onClick={() => setAddClicked(false)}
+          data-identifier="cancel-habit-create-btn"
+        >
+          Cancelar
+        </div>
+        <SaveButton
+          onClick={handleForm}
+          data-identifier="save-habit-create-btn"
+        >
           {isLoading ? (
             <ThreeDots height="50" width="50" radius="9" color="#ffffff" />
           ) : (

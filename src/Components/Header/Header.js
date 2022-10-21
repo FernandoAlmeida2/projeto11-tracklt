@@ -11,7 +11,7 @@ export default function Header(){
     return(
         <HeaderStyle>
             <h1>Tracklt</h1>
-            <img src={userData.image} alt="user-avatar" />
+            <img src={userData.image} alt="user-avatar" data-identifier="avatar" />
         </HeaderStyle>
     )
 }

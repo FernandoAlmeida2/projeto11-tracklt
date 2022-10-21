@@ -46,7 +46,10 @@ export default function Habits() {
     <HabitsStyle>
       <AddHabitsStyle>
         <h1>Meus hábitos</h1>
-        <AddHabitsIcon onClick={() => !isAddClicked && setAddClicked(true)}>
+        <AddHabitsIcon
+          onClick={() => !isAddClicked && setAddClicked(true)}
+          data-identifier="create-habit-btn"
+        >
           <img src={plusIcon} alt="add" />
         </AddHabitsIcon>
       </AddHabitsStyle>
@@ -56,7 +59,7 @@ export default function Habits() {
         isAddClicked={isAddClicked}
       />
       {habitsList.length === 0 ? (
-        <h2>
+        <h2 data-identifier="no-habit-message">
           Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
           começar a trackear!
         </h2>

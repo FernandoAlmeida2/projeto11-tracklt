@@ -30,14 +30,14 @@ export default function HabitItem({ habit, refreshHabits}) {
   return (
     <HabitStyle>
       <ContentStyle>
-        <p>{habit.name}</p>
+        <p data-identifier="habit-name">{habit.name}</p>
         <DayBoxes
           daysSelected={habit.days}
           selectDay=""
           isClickable="nop"
         />
       </ContentStyle>
-      <TrashIcon src={trash} alt="delete item" onClick={deleteHabit} />
+      <TrashIcon src={trash} alt="delete item" onClick={deleteHabit} data-identifier="delete-habit-btn" />
     </HabitStyle>
   );
 }
