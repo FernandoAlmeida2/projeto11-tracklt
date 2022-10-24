@@ -9,4 +9,4 @@ This project is a habit tracker mobile app, using **React**. The user can organi
 
 ## Project Basic Structure
 
-<img align="left" width="50%" src="./src/img/Tracklt.drawio.png" alt="My project structure">  
+<img align="left" width="50%" src="./img/Tracklt.drawio.png" alt="My project structure">  
