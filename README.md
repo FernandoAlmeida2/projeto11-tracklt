@@ -8,13 +8,13 @@ This is a habit tracker mobile app, using **React**. Below are the implemented f
 <details>
     <summary>Sign Up</summary>
 
-<img align="center" width="50%" src="./src/images/signup.png" alt="My project structure">
+<img src="./src/images/signup.png" alt="My project structure">
 </details>
 
 <details>
     <summary>Login</summary>
 
-<img align="center" width="50%" src="./src/images/login.png" alt="My project structure">
+<img src="./src/images/login.png" alt="My project structure">
 </details>
 
 <details>
