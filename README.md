@@ -1,7 +1,7 @@
 # Project 11: Tracklt [React]
 
 
-## About The Project
+## About
 
 This is a habit tracker mobile app, using **React**. Below are the implemented features:
 
@@ -42,9 +42,10 @@ Try it out now at https://projeto11-tracklt.vercel.app/
 
 ## Project Basic Structure
 
-<img align="left" width="50%" src="./src/images/Tracklt.drawio.png" alt="My project structure">  
+<img width="50%" src="./src/images/Tracklt.drawio.png" alt="My project structure">  
 
 ## Technologies
+
 The following tools and frameworks were used in the construction of the project:<br>
 <div>
     <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" height="22px"/>
