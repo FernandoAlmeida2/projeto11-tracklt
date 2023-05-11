@@ -18,7 +18,7 @@ export default function Today({ setProgress }) {
   const dayjs = require("dayjs");
   const dayNumber = dayjs().locale("pt-br").day();
   const dayofMonth = dayjs().locale("pt-br").date();
-  const month = dayjs().locale("pt-br").month();
+  const month = dayjs().locale("pt-br").month() + 1;
 
   function refreshHabits() {
     setRefresh(refreshControl + 1);
